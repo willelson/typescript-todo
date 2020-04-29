@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from 'react';
+import shortid from 'shortid';
 import '../styles/TodoContainer.css';
-import { TodoInterface } from './Todo';
+import { TodoInterface, Todo } from './Todo';
 
 interface ContainerProps {}
 
 interface ContainerState {
-  todos?: TodoInterface[];
+  todos: TodoInterface[];
 }
 
-export class TodoContainer extends Component<ContainerState> {
+export class TodoContainer extends Component<ContainerProps, ContainerState> {
   constructor(props: ContainerProps) {
     super(props);
     this.state = {
@@ -27,7 +28,27 @@ export class TodoContainer extends Component<ContainerState> {
     };
   }
 
+  removeTodo = (id: string): void => {
+    const { todos } = this.state;
+    const newTodos: Array<TodoInterface> = todos.filter(
+      (todo: TodoInterface) => todo.id !== id
+    );
+    this.setState({ todos: newTodos });
+  };
+
+  addTodo = () => {
+    const newTodo: TodoInterface = {
+      id: shortid.generate(),
+      title: '',
+      notes: ''
+    };
+    this.setState({
+      todos: this.state.todos.concat(newTodo)
+    });
+  };
+
   render() {
+    const { todos } = this.state;
     return (
       <Fragment>
         <div className='header'>
@@ -35,20 +56,20 @@ export class TodoContainer extends Component<ContainerState> {
             <h1>Todo list</h1>
           </div>
           <div className='add'>
-            <button>Add</button>
+            <button onClick={this.addTodo}>Add</button>
           </div>
         </div>
-        {/* <div className='todo-container'>
-            {todos.map((todo) => (
-              <Todo
-                key={todo.id}
-                id={todo.id}
-                title={todo.title}
-                notes={todo.notes}
-                removeTodo={this.removeTodo}
-              />
-            ))}
-          </div> */}
+        <div className='todo-container'>
+          {todos.map((todo) => (
+            <Todo
+              key={todo.id}
+              id={todo.id}
+              title={todo.title}
+              notes={todo.notes}
+              removeTodo={this.removeTodo}
+            />
+          ))}
+        </div>
       </Fragment>
     );
   }
