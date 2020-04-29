@@ -1,0 +1,14 @@
+/* Container for entire app */
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Title header */
+.header {
+  border: 1px dashed black;
+  display: grid;
+  grid-template-areas: 'title add';
+  grid-template-columns: 4fr 1fr;
+  padding: 10px;
+}

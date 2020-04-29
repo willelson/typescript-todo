@@ -1,0 +1,70 @@
+/* Container for todos */
+.todo-container {
+  border: 1px dashed black;
+  margin-top: 5px;
+  height: 600px;
+}
+
+/* Individual todo styling */
+.todo {
+  display: grid;
+  grid-template-areas:
+    'todo-title todo-delete'
+    'todo-notes todo-empty';
+  grid-template-columns: 4fr 1fr;
+  padding: 5px;
+  grid-gap: 2px;
+  margin: 5px;
+  border: 1px solid black;
+}
+
+.todo-title,
+.todo-delete,
+.todo-notes,
+.todo-empty {
+  height: 50px;
+}
+
+.todo-title {
+  display: flex;
+  align-items: center;
+}
+
+.todo-title input {
+  font-size: 1.3rem;
+  width: 100%;
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.todo-title input:focus {
+  outline: none;
+}
+
+.todo-delete,
+.add {
+  /* Align button in the center */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-notes textarea {
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  box-sizing: border-box;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+}
